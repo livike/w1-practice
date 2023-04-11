@@ -24,10 +24,10 @@ div {
 }
 
 span {
-  width: 100px;
-  height: 100px;
+  /* width: 100px;
+  height: 100px; */
 
-  border: 10px solid rgb(219, 141, 24);
+  /* border: 10px solid rgb(219, 141, 24); */
 
   padding-top: 8px;
   padding-right: 80px;
@@ -38,4 +38,44 @@ span {
   margin-right: 5px;
   margin-bottom: 50px;
   margin-left: 10px;
+}
+
+/* SPECIFICITÁS */
+
+/* https://www.w3schools.com/css/css_specificity.asp */
+/* ez egy elem és class kombináció, amely egy div-et választ ki, amelynek a class-ja "container". Mivel egy elem és egy class szelektor található a szabályban, ezért 10 pontot kap a specifikusság számításához. */
+div.container {
+  background: green;
+}
+/* egy közvetett elem szelektor, amely kiválasztja a div-et a body elemben. Ez csak egy elem szelektor, ezért 1 pontot kap a specifikusság számításához. */
+body div {
+  background: red;
+}
+/* Ez a szelektor egy olyan div-et választ ki, amelynek az id-ja "main" és a class-ja "container". Az id szelektorok 100 pontot érnek, az elem szelektorok pedig 1 pontot. Ezért ez a szabály 111 pontot kap a specifikusság számításához. */
+div.container#main {
+  background: purple;
+}
+/* az előzőhöz hasonló, de csak az id-vel rendelkezik, és nem az elemmel. Mivel az id szelektorok 100 pontot érnek, ez a szabály is 100 pontot kap a specifikusság számításához. */
+body #main {
+  background: magenta;
+}
+/* ez csak a "container" class nevet választja ki. Mivel ez csak egy class szelektor, ezért csak 10 pontot kap a specifikusság számításához. */
+.container {
+  background: blue;   
+}
+/* a széles körű elem szelektor, amely kiválasztja az összes div-et az oldalon. Mivel ez csak egy elem szelektor, ezért csak 1 pontot kap a specifikusság számításához. */
+div {
+  background: yellow;
+  height: 200px;
+  width: 200px;
+}
+/* A body div.container#main szabály a legmagasabb specificitással rendelkezik az összes szabály közül a fenti példában. Az első rész "body div" kombinálja az elem típusát és azt, hogy a div elem a body elemen belül van. Ez az első rész 0,0,1 specificitással rendelkezik.
+
+A második rész "#main" azonosítóra utal, amely a legmagasabb specificitású választó. Ez a második rész 0,1,0 specificitással rendelkezik.
+
+A harmadik rész ".container" egy osztályra utal, ami közepes specificitású választó. Ez a harmadik rész 0,0,1 specificitással rendelkezik.
+
+Összesen tehát a body div.container#main szabály 0,1,2 specificitással rendelkezik, ami a legmagasabb a többi szabály között. Ez azt jelenti, hogy ez a szabály felülírja a többi szabályt a fenti példában. Ezért a div elem az oldalon a "brown" háttérszínnel jelenik meg, ami a body div.container#main szabályban van meghatározva. */
+body div.container#main {
+  background: brown;
 }
